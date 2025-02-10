@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load tz %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md text-gray-800">
+    <h2 class="text-3xl font-bold text-green-600 mb-4">Order Complete!</h2>
+    <p class="text-lg">Thank you, <span class="font-semibold">{{ pizza_order.user.username }}</span>.</p>
+    <p class="text-gray-700">
+        Your order was placed at <span class="font-semibold">{% now "H:i" %}</span>. 
+        Your pizza will be delivered at <span class="font-semibold">{{ delivery_time|date:"H:i" }}</span> 
+        to <span class="font-semibold">{{ delivery.address }}</span>.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6">Your Pizza Details:</h3>
+    <ul class="mt-4 space-y-4">
+        {% for pizza in pizza_order %}
+            <li class="p-4 rounded-lg shadow-sm">
+                <p><span class="font-medium">Size:</span> {{ pizza.size.name }}</p>
+                <p><span class="font-medium">Crust:</span> {{ pizza.crust.name }}</p>
+                <p><span class="font-medium">Sauce:</span> {{ pizza.sauce.name }}</p>
+                <p><span class="font-medium">Cheese:</span> {{ pizza.cheese.name }}</p>
+                <p>
+                    <span class="font-medium">Toppings:</span> 
+                    {% for topping in pizza.toppings.all %}
+                        {{ topping.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

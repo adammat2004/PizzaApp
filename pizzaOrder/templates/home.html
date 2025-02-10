@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <p class="text-2xl font-bold text-gray-800">Welcome to my site</p>
+    <p class="text-lg text-gray-600 mt-2">Your past orders:</p>
+
+    <ul class="flex flex-col mt-4 space-y-2">
+        {% for order in orders %}
+        <li class="bg-gray-100 p-3 rounded-lg shadow-sm">
+            <span class="font-semibold text-gray-700">{{ order.size }} {{order.crust}} crust pizza with {{order.sauce}} sauce, topped with </span> 
+            <span class="text-gray-600">
+                {% for topping in order.toppings.all %}
+                    {{ topping.name }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            </span>
+			<span class="font-semibold text-gray-700">
+				and {{ order.cheese }} cheese
+			</span>
+        </li>
+        {% empty %}
+        <p class="text-gray-500">No past orders found.</p>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'create_pizza' %}" 
+       class="inline-block mt-6 bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition">
+       Order a pizza
+    </a>
+
+    {% if user.is_authenticated %}
+    <form action="{% url 'logout' %}" method="post" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" 
+                class="bg-gray-700 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-800 transition">
+            Logout
+        </button>
+    </form>
+    {% else %}
+    <p class="text-gray-500 mt-4">You are not logged in</p>
+    <a href="{% url 'login' %}" 
+       class="inline-block mt-2 text-blue-500 hover:underline">
+       Login
+    </a>
+    {% endif %}  
+</div>
+{% endblock %}
+

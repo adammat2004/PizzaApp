@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Register</h2>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <div class="space-y-3">
+            {% for field in form %}
+                <div>
+                    <label class="block text-gray-700 font-medium">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ field.errors.as_text }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 transition">
+            Register
+        </button>
+    </form>
+</div>
+{% endblock %}

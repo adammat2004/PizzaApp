@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Delivery Details</h1>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+
+        <div>
+            <label for="id_name" class="block text-gray-700 font-medium">Full Name:</label>
+            {{ form.name }}
+        </div>
+
+        <div>
+            <label for="id_address" class="block text-gray-700 font-medium">Address:</label>
+            {{ form.address }}
+        </div>
+
+        <div>
+            <label for="id_card_number" class="block text-gray-700 font-medium">Card Number:</label>
+            {{ form.card_number }}
+        </div>
+
+        <div class="flex space-x-4">
+            <div class="w-1/2">
+                <label for="id_expiry_month" class="block text-gray-700 font-medium">Expiry Month:</label>
+                {{ form.expiry_month }}
+            </div>
+            <div class="w-1/2">
+                <label for="id_expiry_year" class="block text-gray-700 font-medium">Expiry Year:</label>
+                {{ form.expiry_year }}
+            </div>
+        </div>
+
+        <div>
+            <label for="id_cvv" class="block text-gray-700 font-medium">CVV:</label>
+            {{ form.card_cvv }}
+        </div>
+
+        <div>
+            <button type="submit" class="w-full bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600 transition">
+                Complete Order
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

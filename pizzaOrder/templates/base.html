@@ -1,0 +1,39 @@
+{% load static tailwind_tags %} 
+<html>
+	<head>
+     <title>My webpage</title>
+     <style>
+			ul {
+			  list-style-type: none;
+			  margin: 0;
+			  padding: 0;
+			}
+			
+			li {
+			  display: inline;
+			}
+			</style>
+		{% tailwind_css %}
+  	</head>
+	<body>
+		<nav class="bg-red-500 p-4 flex justify-between items-center">
+			<!-- Logo / Brand Name -->
+			<div class="text-white text-2xl font-bold">
+				<a href="/">PizzaHub</a>
+			</div>
+		
+			<!-- Navigation Links -->
+			<ul class="flex space-x-6">
+				<li><a href="/" class="text-white hover:text-gray-200">Home</a></li>
+				<li><a href="/create_pizza" class="text-white hover:text-gray-200">Order</a></li>
+				<li><a href="/register" class="text-white hover:text-gray-200">Register</a></li>
+				<li><a href="/login" class="text-white hover:text-gray-200">Login</a></li>
+			</ul>
+		</nav>
+		
+	  
+	  <!-- content block that will be filled in by child templates -->
+	  {% block content %}
+	  {% endblock %}
+	</body>
+</html>
